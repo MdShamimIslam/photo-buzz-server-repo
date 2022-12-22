@@ -95,7 +95,7 @@ async function run () {
 
 
        const review = req.body;
-        // console.log(result);
+       
         const result = await reviewCollection.insertOne(review);
          res.send(result);
          console.log(result);
