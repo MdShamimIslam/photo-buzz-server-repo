@@ -68,7 +68,7 @@ async function run () {
             const cursor = serviceCollection.find(query).hint( { $natural : -1 } );
             
             const service = await cursor.limit(size).toArray();
-            //  const count = await serviceCollection.estimatedDocumentCount();
+            
             res.send( {service});
 
           }
