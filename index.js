@@ -126,7 +126,7 @@ async function run() {
       const query = { _id: ObjectId(id) };
 
       const result = await reviewCollection.findOne(query);
-      // const result = await cursor.toArray();
+
       res.send(result);
     });
     app.delete("/reviews/:id", async (req, res) => {
