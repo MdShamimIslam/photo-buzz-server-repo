@@ -1,6 +1,3 @@
-
-
-
 const express = require('express')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
@@ -18,7 +15,7 @@ app.get('/', (req, res) => {
 
 // monogo setup 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_USER}.iovdjjt.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.j5nrexn.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
  
  function verifyJWT(req, res, next){
@@ -40,7 +37,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
  
 
-async function dbConncet () {
+async function run () {
   try {
   const serviceCollection = client.db("kajolCreative").collection("services");
   const reviewCollection = client.db("kajolCreative").collection("reviews");
@@ -103,15 +100,15 @@ async function dbConncet () {
          res.send(result);
          console.log(result);
   })
-app.get("/reviews",verifyJWT, async(req, res) => {
+app.get("/reviews", async(req, res) => {
            const decoded = req.decoded;
            console.log(decoded);
 
           console.log(decoded);
-          if(decoded.email !== req.query.email) {
-             return res.status(401).send({message : "unauthorize access"})
+          // if(decoded.email !== req.query.email) {
+          //    return res.status(401).send({message : "unauthorize access"})
             
-          }
+          // }
              let query = {}
               if(req.query.email) {
             query = {
@@ -168,12 +165,12 @@ app.get("/reviews",verifyJWT, async(req, res) => {
 }
 
 }
-dbConncet().catch(err => console.log(err.name, err.message))
+run().catch(err => console.log(err.name, err.message))
 
 
 
 
 
 app.listen(port, () => {
-  console.log(`kajolcreative server listening on port ${port}`)
+  console.log(`PhotoBuzz server listening on port ${port}`)
 })
