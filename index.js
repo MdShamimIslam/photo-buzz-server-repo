@@ -76,7 +76,7 @@ async function run () {
              const cursor = serviceCollection.find(query);
             
             const service = await cursor.toArray();
-            //  const count = await serviceCollection.estimatedDocumentCount();
+            
             res.send( {service});
 
           }
